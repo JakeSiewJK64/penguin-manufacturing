@@ -1,4 +1,4 @@
-package com.penguin_manufacturing.penguin.controller;
+package com.penguin_manufacturing.penguin.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
