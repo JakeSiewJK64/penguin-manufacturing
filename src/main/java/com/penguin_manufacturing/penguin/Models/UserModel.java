@@ -4,27 +4,67 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 @Table(name = "users")
 public class UserModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Number user_id;
-  private String user_name;
-  private String user_password;
-  private Number role;
-  private String first_name;
-  private String last_name;
-  private String image_url;
+  private int userid;
+  private String username;
+  private String password;
+  private int role;
+  private String firstname;
+  private String lastname;
+
+  public String getFirstName() {
+    return this.firstname;
+  }
+
+  public String getLastName() {
+    return this.lastname;
+  }
+
+  public int getuserid() {
+    return this.userid;
+  }
+
+  public String getusername() {
+    return this.username;
+  }
+
+  public int getrole() {
+    return this.role;
+  }
+
+  public String getpassword() {
+    return this.password;
+  }
+
+  public void setpassword(String password) {
+    this.password = password;
+  }
+
+  public void setusername(String name) {
+    this.username = name;
+  }
+
+  public void setuserid(int id) {
+    this.userid = id;
+  }
+
+  public void setrole(int role) {
+    this.role = role;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstname = firstName;
+  }
+
+  public void setLastName(String lastname) {
+    this.lastname = lastname;
+  }
 }
