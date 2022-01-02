@@ -34,4 +34,19 @@ public class UserModel {
   @Column(name = "image_url")
   private String image_url;
 
+  public void setuser_name(String user_name) {
+    this.user_name = user_name;
+  }
+
+  public String getuser_name() {
+    return this.user_name;
+  }
+
+  public void setimage_url(String image_url) {
+    this.image_url = image_url;
+  }
+
+  public String getimage_url() {
+    return this.image_url;
+  }
 }
