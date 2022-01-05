@@ -6,10 +6,13 @@ import com.penguin_manufacturing.penguin.Models.UserModel;
 import com.penguin_manufacturing.penguin.Services.MyUserDetailsService;
 import com.penguin_manufacturing.penguin.Utils.JwtUtility;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.web.server.ServerHttpSecurity.HttpsRedirectSpec;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +39,7 @@ public class AuthenticationController {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
           authenticationRequest.getusername(), authenticationRequest.getpassword()));
     } catch (Exception e) {
-      e.printStackTrace();
+      return ResponseEntity.status(403).body(e.getMessage());
     }
 
     /**
@@ -47,7 +50,7 @@ public class AuthenticationController {
     // #region
     // !INCORRECT PASSWORD HANDING
     if (!userModel.getpassword().equals(authenticationRequest.getpassword())) {
-      throw new Exception("Invalid Password!");
+      return ResponseEntity.status(403).body("Either your username or password is incorrect!");
     }
     // #endregion
 
