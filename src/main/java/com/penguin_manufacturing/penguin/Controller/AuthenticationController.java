@@ -6,14 +6,12 @@ import com.penguin_manufacturing.penguin.Models.UserModel;
 import com.penguin_manufacturing.penguin.Services.MyUserDetailsService;
 import com.penguin_manufacturing.penguin.Utils.JwtUtility;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.web.server.ServerHttpSecurity.HttpsRedirectSpec;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 public class AuthenticationController {
   @Autowired
