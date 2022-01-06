@@ -6,4 +6,6 @@ import com.penguin_manufacturing.penguin.Models.ApplicationUserRoles;
 
 public interface IRoleService {
   List<ApplicationUserRoles> getAllApplicationRoles();
+
+  String getRoleById(int id);
 }

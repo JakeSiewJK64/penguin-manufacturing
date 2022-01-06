@@ -6,8 +6,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 import com.penguin_manufacturing.penguin.Models.UserModel;
@@ -22,6 +20,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtUtility {
   private String secretKey = "45F94C61FAC55EAFE98CA5F89151E";
+
+  public int extractUserId(String token) {
+    return (int) extractAllClaims(token).get("userid");
+  }
 
   public String extractUsername(String token) {
     return extractAllClaims(token).get("username").toString();
@@ -51,15 +53,14 @@ public class JwtUtility {
   }
 
   public String generateToken(UserModel userModel) {
-    Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, userModel);
+    return createToken(userModel);
   }
 
-  public String createToken(Map<String, Object> claims, UserModel user) {
-
+  public String createToken(UserModel user) {
     JSONObject json = new JSONObject();
     json.put("username", user.getusername());
     json.put("firstName", user.getFirstName());
+    json.put("userid", user.getuserid());
     json.put("lastName", user.getLastName());
     json.put("role", user.getrole());
     json.put("issued_at", new Date(System.currentTimeMillis()));
