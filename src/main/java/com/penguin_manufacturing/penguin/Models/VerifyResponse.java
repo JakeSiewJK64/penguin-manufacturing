@@ -3,9 +3,9 @@ package com.penguin_manufacturing.penguin.Models;
 public class VerifyResponse {
 
   private String username;
-  private int role;
+  private String role;
 
-  public VerifyResponse(String username, int role) {
+  public VerifyResponse(String username, String role) {
     this.username = username;
     this.role = role;
   }
@@ -21,11 +21,11 @@ public class VerifyResponse {
     this.username = username;
   }
 
-  public int getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(int role) {
+  public void setRole(String role) {
     this.role = role;
   }
 }
