@@ -19,4 +19,12 @@ public class RoleService implements IRoleService {
     return this.jdbcTemplate.query("SELECT * FROM role",
         BeanPropertyRowMapper.newInstance(ApplicationUserRoles.class));
   }
+
+  @Override
+  public String getRoleById(int id) {
+    ApplicationUserRoles role = this.jdbcTemplate.query("SELECT rolename FROM role WHERE roleid = " + id,
+        BeanPropertyRowMapper.newInstance(ApplicationUserRoles.class)).get(0);
+    return role.getrolename();
+
+  }
 }

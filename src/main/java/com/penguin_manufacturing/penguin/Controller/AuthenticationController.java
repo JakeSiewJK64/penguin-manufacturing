@@ -14,9 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
@@ -36,14 +35,14 @@ public class AuthenticationController {
   @Autowired
   private UserService userService;
 
-  @RequestMapping(value = "/verify", method = RequestMethod.POST)
+  @PostMapping(value = "/verify")
   public VerifyResponse verifyUser(@RequestBody AuthenticationResponse jwt) {
     String jwtString = jwt.getJwt();
     int userid = jwtUtil.extractUserId(jwtString);
     return this.userService.getUserVerification(userid);
   }
 
-  @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+  @PostMapping(value = "/authenticate")
   public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
       throws Exception {
     try {

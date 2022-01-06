@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.function.Function;
 
 import com.penguin_manufacturing.penguin.Models.UserModel;
+import com.penguin_manufacturing.penguin.Services.Roles.RoleService;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import io.jsonwebtoken.Claims;
@@ -20,6 +22,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtUtility {
   private String secretKey = "45F94C61FAC55EAFE98CA5F89151E";
+
+  @Autowired
+  private RoleService roleService;
 
   public int extractUserId(String token) {
     return (int) extractAllClaims(token).get("userid");
@@ -62,7 +67,7 @@ public class JwtUtility {
     json.put("firstName", user.getFirstName());
     json.put("userid", user.getuserid());
     json.put("lastName", user.getLastName());
-    json.put("role", user.getrole());
+    json.put("role", roleService.getRoleById(user.getrole()));
     json.put("issued_at", new Date(System.currentTimeMillis()));
     json.put("expiration_date", new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10));
 

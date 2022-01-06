@@ -1,5 +1,7 @@
 package com.penguin_manufacturing.penguin.Configurations;
 
+import javax.annotation.security.PermitAll;
+
 import com.penguin_manufacturing.penguin.Filter.JwtRequestFilter;
 import com.penguin_manufacturing.penguin.Services.MyUserDetailsService;
 
@@ -31,7 +33,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll().anyRequest().authenticated()
+    http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll().antMatchers("/verify")
+        .permitAll().anyRequest().authenticated()
         // TODO: CONFIGURE SPRING SECURITY TO ADOPT STATELESS AUTHENTICATION;
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
