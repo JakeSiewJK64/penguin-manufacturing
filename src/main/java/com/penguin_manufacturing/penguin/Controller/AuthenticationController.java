@@ -3,7 +3,9 @@ package com.penguin_manufacturing.penguin.Controller;
 import com.penguin_manufacturing.penguin.Models.AuthenticationRequest;
 import com.penguin_manufacturing.penguin.Models.AuthenticationResponse;
 import com.penguin_manufacturing.penguin.Models.UserModel;
+import com.penguin_manufacturing.penguin.Models.VerifyResponse;
 import com.penguin_manufacturing.penguin.Services.MyUserDetailsService;
+import com.penguin_manufacturing.penguin.Services.UserService;
 import com.penguin_manufacturing.penguin.Utils.JwtUtility;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 public class AuthenticationController {
+
   @Autowired
   private AuthenticationManager authenticationManager;
 
@@ -31,7 +33,17 @@ public class AuthenticationController {
   @Autowired
   private JwtUtility jwtUtil;
 
-  @RequestMapping(method = RequestMethod.POST)
+  @Autowired
+  private UserService userService;
+
+  @RequestMapping(value = "/verify", method = RequestMethod.POST)
+  public VerifyResponse verifyUser(@RequestBody AuthenticationResponse jwt) {
+    String jwtString = jwt.getJwt();
+    int userid = jwtUtil.extractUserId(jwtString);
+    return this.userService.getUserVerification(userid);
+  }
+
+  @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
   public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
       throws Exception {
     try {
