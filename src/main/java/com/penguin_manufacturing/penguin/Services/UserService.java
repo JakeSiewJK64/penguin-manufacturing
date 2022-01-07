@@ -27,8 +27,12 @@ public class UserService implements IUserService {
   public VerifyResponse getUserVerification(int userid) {
     UserModel user = this.jdbcTemplate.query("SELECT * FROM users WHERE userid = " + userid,
         BeanPropertyRowMapper.newInstance(UserModel.class)).get(0);
-    return new VerifyResponse(user.getusername(),
+    return new VerifyResponse(
+        user.getusername(),
         this.jdbcTemplate.query("SELECT rolename FROM role WHERE roleid = " + user.getrole(),
-            BeanPropertyRowMapper.newInstance(ApplicationUserRoles.class)).get(0).getrolename());
+            BeanPropertyRowMapper.newInstance(ApplicationUserRoles.class)).get(0).getrolename(),
+        user.getemail(),
+        user.getfirstname(),
+        user.getlastname());
   }
 }
