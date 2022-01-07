@@ -59,10 +59,7 @@ public class JwtUtility {
   public String createToken(UserModel user) {
     JSONObject json = new JSONObject();
     json.put("username", user.getusername());
-    json.put("firstName", user.getFirstName());
     json.put("userid", user.getuserid());
-    json.put("lastName", user.getLastName());
-    json.put("role", user.getrole());
     json.put("issued_at", new Date(System.currentTimeMillis()));
     json.put("expiration_date", new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10));
 
