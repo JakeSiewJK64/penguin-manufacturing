@@ -3,8 +3,6 @@ package com.penguin_manufacturing.penguin.Configurations;
 import java.util.Arrays;
 import java.util.Collections;
 
-import javax.annotation.security.PermitAll;
-
 import com.penguin_manufacturing.penguin.Filter.JwtRequestFilter;
 import com.penguin_manufacturing.penguin.Services.MyUserDetailsService;
 
